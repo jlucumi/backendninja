@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Paso de parametros por post</title>
+</head>
+<body>
+<!--
+  th:action= Se le asigna la URL hacia donde se va a dirigir  usando @{ruta}
+
+-->
+<form action="#" th:action="@{/Example3Pos/addperson}" th:object = "${person}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Name: <input type="number" th:field="*{age}"/></p>
+    <p><input type="submit" value="Submit"></input></p>
+</form>
+</body>
+</html>

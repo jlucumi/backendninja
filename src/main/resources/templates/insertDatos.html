@@ -8,5 +8,29 @@
 <body>
 <h1>Hola <span th:text="${name}"></span>!!!!! </h1>
 
+----------------------------
+<!--<h2>Obj1 </h2>-->
+<!--<h4>Tu nombre es: <label th:text="${person.name}"></label></h4>-->
+<!--<h4>Tu edad es: <label th:text="${person.age}"></label></h4>-->
+
+<!--<h2>Obj2 </h2>-->
+<!--<h4>Tu nombre es: <label th:text="${person.name}"></label></h4>-->
+<!--<h4>Tu edad es: <label th:text="${person.age}"></label></h4>-->
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person: ${people}">
+        <th th:text="${person.name}"></th>
+        <th th:text="${person.age}"></th>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
