@@ -1,8 +1,18 @@
 package com.udemy.backendninja.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;  // ✅ OK ahora
+import jakarta.validation.constraints.Size;
+
+
 public class Person
 {
+  @NotNull
+  @Size(min = 2, max = 20)
   private String name;
+
+  @NotNull
+  @Min(18)
   private int age;
 
   public Person() {}

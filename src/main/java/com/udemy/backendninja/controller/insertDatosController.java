@@ -1,6 +1,9 @@
 package com.udemy.backendninja.controller;
 
 import com.udemy.backendninja.model.Person;
+import com.udemy.backendninja.service.ExampleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,13 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.swing.*;
+import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PrimitiveIterator;
 
 @Controller
 @RequestMapping("/insert")
 public class insertDatosController
 {
+
+  /**
+   * Inyeccción de la capa de servicios en el controlador para acceder a la
+   * información que llega desde negocio.
+   * Instanciando la interfaz
+   */
+  @Autowired
+  @Qualifier("exampleServicesImpl")
+  private ExampleService exampleService;
+
   public static final String INSERT_VIEW = "insertDatos";
 
   /**
@@ -61,7 +76,7 @@ public class insertDatosController
 
   @GetMapping("/exampleGetPeople1")
   public String getPeopleObj1(Model model){
-    model.addAttribute("people", getPeople());
+    model.addAttribute("people", exampleService.getListPeople());
     return INSERT_VIEW;
   }
 
@@ -69,17 +84,8 @@ public class insertDatosController
   public ModelAndView getPeopleObj2(){
     //Se instancia un obj ModelAndView y se agregan los valores
     ModelAndView mav = new ModelAndView(INSERT_VIEW);
-    mav.addObject("people", getPeople());
+    mav.addObject("people", exampleService.getListPeople());
     return mav ;//Pantalla a la que se navegará
   }
 
-  private List<Person> getPeople(){
-    List<Person> people = new ArrayList<>();
-    people.add(new Person("Jeinson" , 37) );
-    people.add(new Person("Karol B" , 28));
-    people.add(new Person("Karol Jaz" , 25));
-    people.add(new Person("Oladis C" , 63));
-
-    return people;
-  }
 }

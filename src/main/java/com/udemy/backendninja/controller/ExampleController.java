@@ -1,5 +1,8 @@
 package com.udemy.backendninja.controller;
 
+import com.udemy.backendninja.component.ExampleComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,13 @@ public class ExampleController
 {
   public static final String EXAMPLE_VIEW = "example";
 
+  // Le indica a Spring que vamos a inyectar un componente que se encuentra en su memoria
+  @Autowired
+  //Especificamos el nombre del bean en memoria
+  @Qualifier("exampleComponent") //Injection dependencies
+  //Instancia de la injección de dependencias
+  private ExampleComponent exampleComponent;
+
   /*Versión vieja spring antes de la v4*/
   @RequestMapping(value = "/exampleStr", method = RequestMethod.GET)
   public String exampleStr(){
@@ -26,6 +36,7 @@ public class ExampleController
    *  e insertar pocos datos en el html */
   @GetMapping("/exampleString")
   public String exampleString(){
+    exampleComponent.sayHello();
     return EXAMPLE_VIEW;
   }
 
